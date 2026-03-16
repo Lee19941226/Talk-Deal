@@ -8,6 +8,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import DOMPurify from "dompurify";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko.js";
@@ -49,6 +50,8 @@ const FreeBoardDetail = () => {
   const [fbClaimSet, setFbClaimSet] = useState();
   const [fbcClaimSet, setFbcClaimSet] = useState();
   //새로고침 시 좋아요 유지
+  const sanitizeHtml = (html) =>
+    DOMPurify.sanitize(html ?? "", { USE_PROFILES: { html: true } });
 
   /*
   const [like, setLike] = useState(() => {
@@ -547,7 +550,9 @@ const FreeBoardDetail = () => {
           <div
             className="detail-freeBoardContent"
             style={{ marginLeft: "10px" }}
-            dangerouslySetInnerHTML={{ __html: freeBoard.freeBoardContent }}
+            dangerouslySetInnerHTML={{
+              __html: sanitizeHtml(freeBoard.freeBoardContent),
+            }}
           ></div>
         </div>
         <div className="recommend-box">
@@ -877,7 +882,7 @@ const FreeBoardDetail = () => {
                     <div
                       className="comment-text"
                       dangerouslySetInnerHTML={{
-                        __html: comment.fbCommentContent,
+                        __html: sanitizeHtml(comment.fbCommentContent),
                       }}
                     ></div>
                   )}
@@ -1011,3 +1016,4 @@ const FreeBoardDetail = () => {
 };
 
 export default FreeBoardDetail;
+
