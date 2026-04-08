@@ -53,27 +53,27 @@ const FreeBoardDetail = () => {
   const sanitizeHtml = (html) =>
     DOMPurify.sanitize(html ?? "", { USE_PROFILES: { html: true } });
 
-  /*
-  const [like, setLike] = useState(() => {
-    const saved = localStorage.getItem("like");
-    return saved === "true";
-  });
-  */
-  const [like, setLike] = useState(true);
+  const [like, setLike] = useState(false);
 
-  axios
-    .get(
-      `${
-        import.meta.env.VITE_BACK_SERVER
-      }/freeBoard/isLike/${memberNo}/${freeBoardNo}`
-    )
-    .then((res) => {
-      console.log(res.data);
-      setLike(res.data);
-    })
-    .catch((err) => {
-      navigate("/pageerror");
-    });
+  useEffect(() => {
+    if (!memberNo) {
+      setLike(false);
+      return;
+    }
+    axios
+      .get(
+        `${
+          import.meta.env.VITE_BACK_SERVER
+        }/freeBoard/isLike/${memberNo}/${freeBoardNo}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        setLike(res.data);
+      })
+      .catch((err) => {
+        navigate("/pageerror");
+      });
+  }, [memberNo, freeBoardNo]);
   console.log(like);
 
   // 좋아요를 누르면 로컬스토리지에 저장된 commentLike를 객체로 만듦
