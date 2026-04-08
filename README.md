@@ -1,8 +1,8 @@
-﻿# 💬 Talk & Deal - 사용자 참여형 커뮤니티 플랫폼
+# 💬 Talk & Deal - 사용자 참여형 커뮤니티 플랫폼
 
 > Final Project | 2025.10 - 2025.11 | 팀 4명
 
-자유게시판 · 투표 · 중고거래 기능을 갖춘 사용자 참여형 커뮤니티 플랫폼입니다.
+자유게시판 · 투표 · 실시간 채팅 기능을 갖춘 사용자 참여형 커뮤니티 플랫폼입니다.
 
 ## 🛠 기술 스택
 - **Backend**: Java 17, Spring Boot 3.5, Spring Security, JWT, MyBatis
